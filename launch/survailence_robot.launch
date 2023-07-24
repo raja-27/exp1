@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Run the armor_service node -->
+  <node name="armor_service" pkg="armor" type="execute" args="it.emarolab.armor.ARMORMainService" />
+
+  <!-- Set ROS parameters -->
+  <param name="state/initial_pose" value="[0.0, 0.0]" />
+  <param name="config/environment_size" value="[10.0, 10.0]" />
+  <param name="test/random_plan_points" value="[2, 8]" />
+  <param name="test/random_plan_time" value="[0.2, 0.8]" />
+  <param name="test/random_motion_time" value="[0.1, 1.0]" />
+  <param name="test/random_sense/active" value="True" />
+  <param name="test/random_sense/battery_time" value="[15.0, 40.0]" />
+
+  <!-- Run FSM and other nodes required -->
+  <node pkg="expo_assignment_1" type="robot_state_machine.py" name="Robot_state_machine" launch-prefix="xterm -fa 'Monospace' -fs 10 -e" />
+  <node pkg="expo_assignment_1" type="robots_condition.py" name="robot_pose" />
+  <node pkg="expo_assignment_1" type="planner.py" name="planner" />
+  <node pkg="expo_assignment_1" type="controller.py" name="controller" />
+
+</launch>
+
